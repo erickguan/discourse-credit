@@ -1,0 +1,33 @@
+zh_CN:
+  js:
+    credit:
+      manage:
+        title: "积分奖赏"
+        body: "给用户%{username}的奖赏分值："
+        instruction: "输入一个整数，范围为%{min}~%{max}。"
+        close: "关闭"
+        submit: "设置"
+        error:
+          missing: "分值不能为空"
+          invalid: "分值必须为整数"
+          not_in_range: "分值必须在设定范围内"
+      post:
+        title: "奖赏分值记录"
+        operator: "来自"
+        change: "分值"
+        close: "关闭"
+      post_menu_button: "积分奖赏"
+      toll_builder:
+        title: "设置积分支付内容"
+        content:
+          label: "内容"
+          invalid: "不能为空"
+        credit:
+          label: "需要分值"
+          invalid: "需要一个正整数"
+        insert: "添加"
+      profile:
+        title: "积分"
+      required_purchase: "需要支付%{credit}积分才能阅读。"
+      confirm_purchase: "确认支付%{credit}积分？"
+      purchase: "购买"

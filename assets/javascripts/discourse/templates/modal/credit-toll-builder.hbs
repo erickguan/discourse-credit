@@ -1,0 +1,19 @@
+<div class='modal-body credit-toll-builder'>
+  <form class='poll-ui-builder-form form-horizontal'>
+    <div class='input-group'>
+      <label>{{i18n 'credit.toll_builder.content.label'}}</label>
+      {{input-tip validation=contentValidation}}
+      {{textarea value=raw}}
+    </div>
+    <div class='input-group'>
+      <label>{{i18n 'credit.toll_builder.credit.label'}}</label>
+      {{input-tip validation=creditValidation}}
+      {{input value=credit}}
+    </div>
+  </form>
+</div>
+
+<div class='modal-footer'>
+  {{d-button action='insertCreditToll' icon='money' class='btn-primary' label='credit.toll_builder.insert' disabled=disableInsert}}
+</div>
+

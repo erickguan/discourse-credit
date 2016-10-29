@@ -1,0 +1,7 @@
+<div class="credit-toll-container">
+  {{#if loading}}
+    载入中...
+  {{else}}
+    {{{body}}}{{#unless purchased}}{{d-button class="btn-primary" action="purchase" icon='money' label="credit.purchase"}}{{/unless}}
+  {{/if}}
+</div>

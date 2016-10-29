@@ -1,0 +1,16 @@
+plugins:
+  credit_enabled:
+    default: true
+    client: true
+  credit_min_permit:
+    default: -20
+    client: true
+  credit_max_permit:
+    default: 20
+    client: true
+  credit_toll_max_permit:
+    default: 100
+    client: true
+  credit_toll_instruction:
+    default: ""
+    client: true

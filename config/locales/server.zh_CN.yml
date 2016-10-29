@@ -1,0 +1,14 @@
+zh_CN:
+  plugins:
+    credit_enabled: "启用积分插件"
+    credit_min_permit: "最小奖励分值"
+    credit_max_permit: "最大奖励分值"
+    credit_toll_max_permit: "最大积分要求设置"
+    credit_toll_instruction: "添加积分要求时放置到编辑器的空白内容，可用于提示"
+  credit:
+    multiple_credit_tolls_without_name: "多个积分内容没有设置不同的名字。"
+    multiple_credit_tolls_with_same_name: "多个积分内容设置了相同的名字。"
+    credit_toll_credit_invalid: "积分设置不正确"
+    not_first_post: "非主贴不能设置积分要求"
+    not_unique: "只能设置一个积分要求内容"
+    invalid_credit: "不在设置范围内的分值"

@@ -1,0 +1,31 @@
+<div class="modal-body">
+  <table>
+    <thead>
+      <tr>
+        <td>{{i18n 'credit.post.operator'}}</td>
+        <td>{{i18n 'credit.post.change'}}</td>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each credits as |c|}}
+        <tr>
+          <td class="names">
+            <span>
+              {{#user-link user=c.user}}
+                {{avatar c.user imageSize="tiny"}}
+                {{c.user.username}}
+              {{/user-link}}
+            </span>
+          </td>
+          <td>
+            {{c.credit}}
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>
+
+<div class="modal-footer">
+  {{d-button action="closeModal" label="credit.post.close"}}
+</div>
