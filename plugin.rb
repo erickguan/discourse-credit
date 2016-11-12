@@ -229,17 +229,17 @@ after_initialize do
   add_to_serializer(:user, :credit) { UserCustomField.find_by(user_id: object.id, name: CREDIT_FIELD_NAME)&.value&.to_i || 0 }
 
   # new user
-  DiscourseEvent.trigger(:user_created) do |user|
+  DiscourseEvent.on(:user_created) do |user|
     user.custom_fields[CREDIT_FIELD_NAME] = 5
     user.save!
   end
   # new topic
-  DiscourseEvent.on(:topic_created) do |topic, opts, user|
+  DiscourseEvent.on(:topic_created) do |_, _, user|
     user.custom_fields[CREDIT_FIELD_NAME] = user.custom_fields[CREDIT_FIELD_NAME].to_i + 1
     user.save!
   end
   # new post, replied post
-  DiscourseEvent.trigger(:post_created) do |post, opts, user|
+  DiscourseEvent.on(:post_created) do |post, _, user|
     user.custom_fields[CREDIT_FIELD_NAME] = user.custom_fields[CREDIT_FIELD_NAME].to_i + 1
     user.save!
     replied_post = post.reply_to_post
@@ -257,13 +257,13 @@ after_initialize do
   end
 
   #post destory
-  DiscourseEvent.on(:post_destroyed) do |post, opts, user|
+  DiscourseEvent.on(:post_destroyed) do |post, _, _|
     post.user.custom_fields[CREDIT_FIELD_NAME] = post.user.custom_fields[CREDIT_FIELD_NAME].to_i - 3
     post.user.save!
   end
 
   #topic destroy
-  DiscourseEvent.on(:topic_destroyed) do |topic, user|
+  DiscourseEvent.on(:topic_destroyed) do |topic, _|
     topic.user.custom_fields[CREDIT_FIELD_NAME] = topic.user.custom_fields[CREDIT_FIELD_NAME].to_i - 10
     topic.user.save!
   end
