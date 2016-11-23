@@ -217,6 +217,8 @@ after_initialize do
       DistributedMutex.synchronize("#{PLUGIN_NAME}-#{self.id}") do
         DiscourseCredit::CreditTollsUpdater.update(self, tolls)
       end
+    else
+      custom_fields[DiscourseCredit::CREDIT_TOLLS_CUSTOM_FIELD] = tolls
     end
 
     true

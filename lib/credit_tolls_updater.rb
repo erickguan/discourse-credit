@@ -10,6 +10,7 @@ module DiscourseCredit
         post.custom_fields[DiscourseCredit::CREDIT_TOLLS_CUSTOM_FIELD] = tolls
         post.save_custom_fields(true)
       end
+      p tolls, previous_tolls, post.custom_fields[DiscourseCredit::CREDIT_TOLLS_CUSTOM_FIELD]
     end
 
     def self.tolls_updated?(current_tolls, previous_tolls)
