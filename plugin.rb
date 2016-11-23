@@ -243,7 +243,7 @@ after_initialize do
     user.custom_fields[CREDIT_FIELD_NAME] = user.custom_fields[CREDIT_FIELD_NAME].to_i + 1
     user.save!
     replied_post = post.reply_to_post
-    if replied_post.user
+    if replied_post && replied_post.user
       replied_post.user.custom_fields[CREDIT_FIELD_NAME] = replied_post.user.custom_fields[CREDIT_FIELD_NAME].to_i + 1
       replied_post.user.save!
     end
