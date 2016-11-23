@@ -26,6 +26,7 @@ zh_CN:
           label: "需要分值"
           invalid: "需要一个正整数"
         insert: "添加"
+        invalid_post: "只有在创建帖子时才能设置积分设置。"
       profile:
         title: "积分"
       required_purchase: "需要支付%{credit}积分才能阅读。"

@@ -18,6 +18,7 @@ export default Ember.Controller.extend(ModalFunctionality, {
   @computed('credit', 'lastValidatedAt')
   creditValidation(credit, lastValidatedAt) {
     let reason;
+
     if (Ember.isEmpty(credit)) {
       reason = I18n.t('credit.manage.error.missing');
     } else if (isNaN(credit) || parseInt(credit, 10) != credit) {

@@ -26,14 +26,28 @@ export default Ember.Controller.extend(ModalFunctionality, {
 
   @computed('credit')
   creditValidation(credit) {
-    if (parseInt(credit) <= 0) {
-      return InputValidation.create({ failed: true, reason: I18n.t('credit.toll_builder.credit.invalid') });
+    let reason;
+    if (Ember.isEmpty(credit)) {
+      reason = I18n.t('credit.manage.error.missing');
+    } else if (isNaN(credit) || parseInt(credit, 10) != credit) {
+      reason = I18n.t('credit.manage.error.invalid');
+    }
+
+    if (reason) {
+      return InputValidation.create({ failed: true, reason });
     }
   },
 
-  @computed('contentValidation', 'creditValidation')
-  disableInsert(contentValidation, creditValidation) {
-    return contentValidation || creditValidation;
+  @computed('model.creatingTopic')
+  postValidation(creatingTopic) {
+    if (!creatingTopic) {
+      return InputValidation.create({ failed: true, reason: I18n.t('credit.toll_builder.invalid_post') });
+    }
+  },
+
+  @computed('contentValidation', 'creditValidation', 'postValidation')
+  disableInsert(contentValidation, creditValidation, postValidation) {
+    return contentValidation || creditValidation || postValidation;
   },
 
   actions: {
