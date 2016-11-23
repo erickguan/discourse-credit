@@ -9,10 +9,7 @@ module DiscourseCredit
     def validate_credit_tolls
       tolls = {}
 
-      unless @post.is_first_post?
-        @post.errors.add(:base, I18n.t("credit.not_first_post"))
-        return false
-      end
+      return tolls unless @post.is_first_post?
 
       unless @post.archetype != Archetype.private_message
         @post.errors.add(:base, I18n.t("credit.not_normal_topic"))
