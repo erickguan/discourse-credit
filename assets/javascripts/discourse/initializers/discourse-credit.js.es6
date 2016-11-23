@@ -30,7 +30,6 @@ function initializeWithApi(api) {
   // manage score menu
   api.attachWidgetAction('post-admin-menu', 'manageCredit', function(e) {
     showModal('admin-credit-management', {
-      title: 'credit.manage.title',
       model: this.attrs
     });
   });
@@ -44,7 +43,6 @@ function initializeWithApi(api) {
   api.includePostAttributes('credit');
   api.attachWidgetAction('post', 'showPostCreditModal', function(e) {
     showModal('post-credit', {
-      title: 'credit.post.title',
       model: this.attrs
     });
   });
@@ -66,7 +64,6 @@ function initializeWithApi(api) {
     actions: {
       showCreditTollBuilder() {
         showModal('credit-toll-builder', {
-          title: 'credit.toll_builder.title',
           model: this.get('model')
         }).set('toolbarEvent', this.get('toolbarEvent'));
       }

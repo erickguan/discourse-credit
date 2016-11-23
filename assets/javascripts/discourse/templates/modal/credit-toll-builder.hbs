@@ -1,4 +1,5 @@
-<div class='modal-body credit-toll-builder'>
+{{#d-modal-body title="credit.toll_builder.title" class="credit-toll-builder"}}
+  <div class='modal-body credit-toll-builder'>
   <form class='poll-ui-builder-form form-horizontal'>
     <div class='input-group'>
       <label>{{i18n 'credit.toll_builder.content.label'}}</label>
@@ -11,9 +12,8 @@
       {{input value=credit}}
     </div>
   </form>
-</div>
+{{/d-modal-body}}
 
 <div class='modal-footer'>
   {{d-button action='insertCreditToll' icon='money' class='btn-primary' label='credit.toll_builder.insert' disabled=disableInsert}}
 </div>
-

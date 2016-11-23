@@ -1,10 +1,10 @@
-<div class="modal-body">
-<p>
-  {{{bodyContent}}}
-  {{input type="number" min=minCreditPermit max=maxCreditPermit value=credit}}
-  {{input-tip validation=creditValidation}}
-</p>
-</div>
+{{#d-modal-body title="credit.manage.title" class="credit-management-modal"}}
+  <p>
+    {{{bodyContent}}}
+    {{input type="number" min=minCreditPermit max=maxCreditPermit value=credit}}
+    {{input-tip validation=creditValidation}}
+  </p>
+{{/d-modal-body}}
 
 <div class="modal-footer">
   {{d-button action="submit" class="btn-primary" label="credit.manage.submit" disabled=creditValidation}}
