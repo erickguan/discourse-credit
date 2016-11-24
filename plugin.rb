@@ -65,30 +65,31 @@ after_initialize do
     def initialize(opts)
       @post = Post.find(opts[:post_id])
       @credit = opts[:credit]&.to_i
+      @operator = opts[:operator]
     end
 
     def create
       raise Discourse::InvalidParameters if @post.post_number != 1 || @post&.topic.archetype != Archetype.default
-      raise Discourse::InvalidParameters if @credit > SiteSetting.credit_max_permit || credit < SiteSetting.credit_min_permit || credit == 0
+      raise Discourse::InvalidParameters if @credit > SiteSetting.credit_max_permit || @credit < SiteSetting.credit_min_permit || @credit == 0
 
       # post credit record
-      credits = PluginStore.get(PLUGIN_NAME, post.id) || []
-      credits.push('user_id' => current_user.id, 'credit' => credit)
+      credits = PluginStore.get(PLUGIN_NAME, @post.id) || []
+      credits.push('user_id' => @operator.id, 'credit' => @credit)
       total = credits.sum { |c| c['credit'] }
-      PluginStore.set(PLUGIN_NAME, post.id, credits)
-      pf = PostCustomField.find_or_initialize_by(name: CREDIT_FIELD_NAME, post_id: post.id)
+      PluginStore.set(PLUGIN_NAME, @post.id, credits)
+      pf = PostCustomField.find_or_initialize_by(name: CREDIT_FIELD_NAME, post_id: @post.id)
       pf.value = total
       pf.save!
 
       # user credit record
-      user = post.user
+      user = @post.user
       user_credits = PluginStore.get(PLUGIN_NAME, user.id) || []
-      user_credits.push(user_id: current_user.id, post_id: post.id, credit: credit)
+      user_credits.push(user_id: @operator.id, post_id: @post.id, credit: @credit)
       PluginStore.set(PLUGIN_NAME, user.id, user_credits)
 
       # user credit
       user_credit = UserCustomField.find_or_initialize_by(user: user, name: CREDIT_FIELD_NAME)
-      user_credit.value = user_credit.value.to_i + credit
+      user_credit.value = user_credit.value.to_i + @credit
       user_credit.save
 
       total
@@ -124,7 +125,7 @@ after_initialize do
     before_action :ensure_staff
 
     def create
-      manager = DiscourseCredit::CreditManager.new(params)
+      manager = DiscourseCredit::CreditManager.new(post_id: params[:post_id], credit: params[:credit], operator: current_user)
 
       total = manager.create
 
@@ -193,7 +194,7 @@ after_initialize do
         raise Discourse::InvalidAccess.new("Can't see")
       end
 
-      manager = DiscourseCredit::CreditManager.new({post_id: post.id, credit: toll["credit"]})
+      manager = DiscourseCredit::CreditManager.new({post_id: post.id, credit: toll["credit"], operator: current_user})
       if manager.purchase(current_user)
         render json: success_json, status: 200
       else
