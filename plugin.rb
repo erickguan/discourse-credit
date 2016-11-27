@@ -69,7 +69,7 @@ after_initialize do
     end
 
     def create
-      raise Discourse::InvalidParameters if @post.post_number != 1 || @post&.topic.archetype != Archetype.default
+      raise Discourse::InvalidParameters if @post&.topic.archetype != Archetype.default
       raise Discourse::InvalidParameters if @credit > SiteSetting.credit_max_permit || @credit < SiteSetting.credit_min_permit || @credit == 0
 
       # post credit record
