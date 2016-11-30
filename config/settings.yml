@@ -14,3 +14,9 @@ plugins:
   credit_toll_instruction:
     default: ""
     client: true
+  credit_user_created_credit: 5
+  credit_topic_created_credit: 1
+  credit_topic_destroyed_credit: 10
+  credit_post_created_credit: 1
+  credit_post_destroyed_credit: 3
+  credit_liked_credit: 2

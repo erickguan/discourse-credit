@@ -233,41 +233,41 @@ after_initialize do
 
   # new user
   DiscourseEvent.on(:user_created) do |user|
-    user.custom_fields[CREDIT_FIELD_NAME] = 5
+    user.custom_fields[CREDIT_FIELD_NAME] = SiteSetting.credit_user_created_credit
     user.save!
   end
   # new topic
   DiscourseEvent.on(:topic_created) do |_, _, user|
-    user.custom_fields[CREDIT_FIELD_NAME] = user.custom_fields[CREDIT_FIELD_NAME].to_i + 1
+    user.custom_fields[CREDIT_FIELD_NAME] = user.custom_fields[CREDIT_FIELD_NAME].to_i + SiteSetting.credit_topic_created_credit
     user.save!
   end
   # new post, replied post
   DiscourseEvent.on(:post_created) do |post, _, user|
-    user.custom_fields[CREDIT_FIELD_NAME] = user.custom_fields[CREDIT_FIELD_NAME].to_i + 1
+    user.custom_fields[CREDIT_FIELD_NAME] = user.custom_fields[CREDIT_FIELD_NAME].to_i + SiteSetting.credit_post_created_credit
     user.save!
     replied_post = post.reply_to_post
     if replied_post && replied_post.user
-      replied_post.user.custom_fields[CREDIT_FIELD_NAME] = replied_post.user.custom_fields[CREDIT_FIELD_NAME].to_i + 1
+      replied_post.user.custom_fields[CREDIT_FIELD_NAME] = replied_post.user.custom_fields[CREDIT_FIELD_NAME].to_i + SiteSetting.credit_post_created_credit
       replied_post.user.save!
     end
   end
   #like
   add_model_callback(:post_action, :after_create) do
     if is_like?
-      post.user.custom_fields[CREDIT_FIELD_NAME] = post.user.custom_fields[CREDIT_FIELD_NAME].to_i + 2
+      post.user.custom_fields[CREDIT_FIELD_NAME] = post.user.custom_fields[CREDIT_FIELD_NAME].to_i + SiteSetting.credit_liked_credit
       post.user.save!
     end
   end
 
   #post destory
   DiscourseEvent.on(:post_destroyed) do |post, _, _|
-    post.user.custom_fields[CREDIT_FIELD_NAME] = post.user.custom_fields[CREDIT_FIELD_NAME].to_i - 3
+    post.user.custom_fields[CREDIT_FIELD_NAME] = post.user.custom_fields[CREDIT_FIELD_NAME].to_i - SiteSetting.credit_post_destroyed_credit
     post.user.save!
   end
 
   #topic destroy
   DiscourseEvent.on(:topic_destroyed) do |topic, _|
-    topic.user.custom_fields[CREDIT_FIELD_NAME] = topic.user.custom_fields[CREDIT_FIELD_NAME].to_i - 10
+    topic.user.custom_fields[CREDIT_FIELD_NAME] = topic.user.custom_fields[CREDIT_FIELD_NAME].to_i - SiteSetting.credit_topic_destroyed_credit
     topic.user.save!
   end
 end

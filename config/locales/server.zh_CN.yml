@@ -5,6 +5,13 @@ zh_CN:
     credit_max_permit: "最大奖励分值"
     credit_toll_max_permit: "最大积分要求设置"
     credit_toll_instruction: "添加积分要求时放置到编辑器的空白内容，可用于提示"
+    credit_create_post_credit: "创建（回复）帖子的分值"
+    credit_user_created_credit: "新建用户的分值"
+    credit_topic_created_credit: "创建主题的分值，和发帖分值累加"
+    credit_topic_destroyed_credit: "删除帖子的分值"
+    credit_post_created_credit: "创建（回复）帖子的分值"
+    credit_post_destroyed_credit: "删除帖子的分值"
+    credit_liked_credit: "被赞的分值"
   credit:
     multiple_credit_tolls_without_name: "多个积分内容没有设置不同的名字。"
     multiple_credit_tolls_with_same_name: "多个积分内容设置了相同的名字。"
