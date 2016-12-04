@@ -12,7 +12,6 @@ module DiscourseCredit
       return tolls unless @post.is_first_post?
 
       unless @post.archetype != Archetype.private_message
-        @post.errors.add(:base, I18n.t("credit.not_normal_topic"))
         return false
       end
 
